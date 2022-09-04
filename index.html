@@ -11,5 +11,90 @@
       開発は以下のリポジトリで行われており、PC-98向けの機能もこちらでマージされています。<br>
       Github ELKSリポジトリ <a href="https://github.com/jbruchon/elks"> https://github.com/jbruchon/elks </a>
     </p>
+    <h2>イメージ</h2>
+    <p>
+      フロッピー向けのイメージは以下から入手できます。<br>
+      現在の最新リリースは0.6.0です。<br>
+      <div style="margin-left:20px;">
+        ELKS v0.6.0 <a href="https://github.com/jbruchon/elks/releases/tag/v0.6.0"> https://github.com/jbruchon/elks/releases/tag/v0.6.0 </a><br>
+        Assetsのところにあるfd1232-pc98.img, fd1440-pc98.imgがPC-98向けになります。<br>
+        fd1232-pc98.img : 1.232MB 2HD向け (3.5インチ/5.25インチ)<br>
+        fd1440-pc98.img : 1.440MB PC-9801BX以降の3モードドライブ等で使用可 (3.5インチ)<br><br>
+        開発中のもので最新のcommitでビルドされたものはActionsからcommitメッセージをクリックすると入手できます。(不安定な可能性あり)<br>
+        こちらは現状PC-98版はfd1232.imgのみになります。<br>
+        <a href="https://github.com/jbruchon/elks/actions"> https://github.com/jbruchon/elks/actions</a><br><br>
+      </div>
+      イメージはNeko Progject 21/WやDOSBox-Xのエミュレータでそのまま読み込めます。<br>
+      拡張子が.imgのため、ファイル選択で表示されない場合は全てのファイルを表示させて行ってください。<br>
+      DOSBox-XではNEC PC-98エミュレーションモードを有効にしてください。<br><br>
+
+      1.232MBのフロッピーに書き込む場合、<br>
+      私はフリーウェアのVirtual Floppy Image Converterで.D88形式に変換してDOS/V機5.25インチにDITTで書くか、<br>
+      MAHALITO形式に変換してPC-9801実機で書くか、<br>
+      ELKSのddでimgをそのままPC-9801実機で書くかしています。<br><br>
+      FDI形式に変換すればFlashFloppy化したGotek(ハードウェアFloppyエミュレータ)でも動きました。<br>
+    </p>
+    <h2>ログイン</h2>
+    <p>
+      起動するとlogin:が現れるのでrootと入力すればログインできます。
+    </p>
+    <h2>マウント</h2>
+    <p>
+      FAT12/16のDiskをマウントできます。<br>
+      ハードディスクはSCSIとIDEに対応していますが以下の条件があります。<br>
+      - SCSIとIDE合わせて4台まで<br>
+      - 各Diskのパーティションは4つまで<br>
+      - BIOSで正しく容量を認識できるもののみ対応 (いわゆるBIOSの壁の影響を受けます)<br>
+      PC-98 IPL/PC-AT MBR形式どちらも対応していますが、<br>
+      PC-98形式でMBRのパーティションも記述したような特殊なものは現状未サポートなのでマウントしないでください。<br>
+      BIOSで正しく認識できないものはマウントしないでください。<br>
+      なお、無保証ですので重要なデータのディスクは直接マウントしないことをお薦めします。<br>
+      <div style="margin-left:20px;">
+        FDD第2ドライブのマウント方法<br>
+        mount -t msdos /dev/fd1 /mnt<br>
+        (第1,3,4ドライブをマウントする場合はfd0, fd2, fd3)<br><br>
+        HDD aドライブの第1パーティションをマウントする方法<br>
+        mount -t msdos /dev/hda1 /mnt<br>
+        (第2,3,4パーティションをマウントする場合はhda2,hda3,hda4)<br>
+        ディスクがhda, hdb, hdc, hddのどれに割り当てられたかは起動メッセージからご確認ください。<br><br> 
+      </div>
+      変更内容を確実にディスクに書き込むにはsyncを実施ください。<br>
+      電源を切る前にディスクのumountを実施ください。<br>
+      sync<br>
+      umount /mnt<br>
+      shutdown<br>
+    </p>
+    <h2>アプリ</h2>
+    <h3>エディタ</h3>
+    vi(elvis)が使用できます。<br>
+    viで起動できます。<br>
+    <h3>BASIC</h3>
+    BASICで簡単なプログラミングができます。<br>
+    PC-98向けでは一部のLIOを用いて描画できます。<br>
+    basicで起動できます。<br>
+    終了はctrl-Dです。<br>
+    シンタックスは以下を参照ください。<br>
+    save, loadのファイル名には.basを含めない点、ご注意ください。<br>
+    <a href="https://github.com/jbruchon/elks/tree/master/elkscmd/basic#readme"> https://github.com/jbruchon/elks/tree/master/elkscmd/basic#readme</a><br><br>
+    PC-98向けのサンプルは以下にあります。MODE 1でグラフィックモードに入ります。<br>
+    <a href="https://github.com/jbruchon/elks/blob/master/elkscmd/basic/test98.bas">test98.bas</a><br>
+    <h2>開発中</h2>
+    nano-Xによる描画ドライバのPC-98版を開発中です。<br>
+    それなりに描画できるようにはなっています。<br>
+    以下はPC-9801BXでnxterm/nxclock/nxdemo/nxworld/nxlandmineを実行した動画です。<br>
+    <a href="https://twitter.com/i/status/1564683753254924288"> PC-9801BXでのnano-Xアプリ描画</a><br>
+    <h2>開発予定</h2>
+    - シリアルコンソール<br>
+    - 漢字表示<br>
+    <h2>免責</h2>
+    ELKSやここに書かれた内容は無保証です。<br>
+    記載内容を実施した結果生じたいかなる損害も当方は一切責任を負わないものとします。<br>
+
+    <h2>問い合わせ</h2>
+    issue:<br>
+    <a href="https://github.com/jbruchon/elks/issues"> https://github.com/jbruchon/elks/issues</a> (日本語でも大丈夫だと思います)<br>
+    Twitter:<br>
+    <a href="https://twitter.com/tyama50"> https://twitter.com/tyama50</a><br>
   </body>
 </html>
+
