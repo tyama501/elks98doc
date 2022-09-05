@@ -14,7 +14,7 @@
     <h2>イメージ</h2>
     <p>
       フロッピー向けのイメージは以下から入手できます。<br>
-      現在の最新リリースは0.6.0です。<br>
+      2022.09現在の最新リリースは0.6.0です。<br>
       <div style="margin-left:20px;">
         ELKS v0.6.0 <a href="https://github.com/jbruchon/elks/releases/tag/v0.6.0"> https://github.com/jbruchon/elks/releases/tag/v0.6.0 </a><br>
         Assetsのところにあるfd1232-pc98.img, fd1440-pc98.imgがPC-98向けになります。<br>
@@ -64,7 +64,7 @@
       umount /mnt<br>
       shutdown<br>
     </p>
-    <h2>アプリ</h2>
+    <h2>アプリ / コマンド</h2>
     <h3>エディタ</h3>
     vi(elvis)が使用できます。<br>
     viで起動できます。<br>
@@ -75,9 +75,17 @@
     終了はctrl-Dです。<br>
     シンタックスは以下を参照ください。<br>
     save, loadのファイル名には.basを含めない点、ご注意ください。<br>
+    PEEK, POKEはv0.6.0リリース後に追加されたものになります。
     <a href="https://github.com/jbruchon/elks/tree/master/elkscmd/basic#readme"> https://github.com/jbruchon/elks/tree/master/elkscmd/basic#readme</a><br><br>
     PC-98向けのサンプルは以下にあります。MODE 1でグラフィックモードに入ります。<br>
-    <a href="https://github.com/jbruchon/elks/blob/master/elkscmd/basic/test98.bas">test98.bas</a><br>
+    <a href="https://github.com/jbruchon/elks/blob/master/elkscmd/basic/test98.bas">test98.bas</a><br><br>
+    <h3>screen</h3>
+    ELKSはマルチタスクOSであるためバックグランドで処理を流せますが現状fg, bgのコマンドがありません。<br>
+    2つのフォアグランドの処理を切り替えたい場合はscreenで別スクリーンを立ち上げてフォアグランドで流せば切り替えられます。<br>
+    (但し、現状exitできないissueがありそう...98版だけ？)<br>
+    screen<br>
+    Ctrl-A, Ctrl-Cで別スクリーン<br>
+    Ctrl-A, Ctrl-Pでスクリーン切り替え<br>
     <h2>開発中</h2>
     nano-Xによる描画ドライバのPC-98版を開発中です。<br>
     それなりに描画できるようにはなっています。<br>
