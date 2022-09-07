@@ -5,6 +5,9 @@
   </head>
   <body>
     <h1>ELKS for PC-98 紹介ページ</h1>
+    <p style="font-size:smaller;">
+      Last Update 2022/09/08<br>
+    </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のNEC PC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
       ELKSは8086, 80286, V30等のIntel IA16アーキテクチャ向けに開発されているLinux-like OSです。<br>
@@ -82,10 +85,10 @@
     <h3>screen</h3>
     ELKSはマルチタスクOSであるためバックグランドで処理を流せますが現状fg, bgのコマンドがありません。<br>
     2つのフォアグランドの処理を切り替えたい場合はscreenで別スクリーンを立ち上げてフォアグランドで流せば切り替えられます。<br>
-    (但し、現状exitできないissueがありそう...98版だけ？)<br>
     screen<br>
-    Ctrl-A, Cで別スクリーン<br>
-    Ctrl-A, Pでスクリーン切り替え<br>
+    Ctrl-a, cで別スクリーン<br>
+    Ctrl-a, pでスクリーン切り替え<br>
+    Ctrl-a, kで終了<br>
     <h2>開発中</h2>
     nano-Xによる描画ドライバのPC-98版を開発中です。<br>
     それなりに描画できるようにはなっています。<br>
@@ -97,7 +100,10 @@
     <h2>免責</h2>
     ELKSやここに書かれた内容は無保証です。<br>
     記載内容を実施した結果生じたいかなる損害も当方は一切責任を負わないものとします。<br>
-
+    <h2>謝辞</h2>
+    Twitter等で多くの貴重なPC-98の情報を下さる方々、<br>
+    いつもどうもありがとうございます。<br>
+    とても参考になり、また、励みになります。<br>
     <h2>問い合わせ</h2>
     issue:<br>
     <a href="https://github.com/jbruchon/elks/issues"> https://github.com/jbruchon/elks/issues</a> (日本語でも大丈夫だと思います)<br>
