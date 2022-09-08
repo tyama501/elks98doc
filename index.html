@@ -1,6 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
     <title>ELKS for PC-98</title>
   </head>
   <body>
@@ -13,6 +14,16 @@
       ELKSは8086, 80286, V30等のIntel IA16アーキテクチャ向けに開発されているLinux-like OSです。<br>
       開発は以下のリポジトリで行われており、PC-98向けの機能もこちらでマージされています。<br>
       Github ELKSリポジトリ <a href="https://github.com/jbruchon/elks"> https://github.com/jbruchon/elks </a>
+    </p>
+    <h2>PC-98版の動作条件</h2>
+    <p>
+      メインメモリ 640KB<br>
+    </p>
+    <h3>動作確認済み機種</h3>
+    <p>
+      PC-9801UV21<br>
+      PC-9801RX21<br>
+      PC-9801BX<br>
     </p>
     <h2>イメージ</h2>
     <p>
@@ -41,6 +52,16 @@
     <p>
       起動するとlogin:が現れるのでrootと入力すればログインできます。
     </p>
+    <h2>時刻設定</h2>
+    <p>
+      日付や時刻が正しくない場合は設定ください。<br>
+      現在の日付と時刻の確認はdateと打つとできます。<br>
+      設定は以下のようにできます。<br>
+      date -s [yy]yy-m-dTh:m:s<br>
+      example) date -s 2022-09-09T02:07:00<br>
+      また、以下のように打つことでRTCへの書き込みもできます。<br>
+      clock -w<br>
+    </p>      
     <h2>マウント</h2>
     <p>
       FAT12/16のDiskをマウントできます。<br>
