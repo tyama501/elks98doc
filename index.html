@@ -118,6 +118,16 @@
     <a href="https://twitter.com/i/status/1564683753254924288"> PC-9801BXでのnano-Xアプリ描画</a><br>
     - シリアルコンソール<br>
     シリアルドライバを開発中です。<br>
+    以下はPC-9801UV21にBaud Rate 1200bpsでWindowsのTera Termからログインした動画です。<br>
+    <a href="https://twitter.com/tyama50/status/1606967893958496257"> PC-9801UV21にシリアルポートでログイン</a><br>
+    /etc/inittabの先頭行を以下のように変更することでloginがシリアルポートにも出力されるようになります。<br>
+    (変更前) id:1:initdefault: <br>
+    (変更後) id:3:initdefault: <br>
+    また、Baud Rateはs0の行の末尾に追加することで設定できます。<br>
+    (1200bpsに設定) s0:2346:respawn:/bin/getty /dev/ttyS0 1200 <br>
+    /bootoptsのconsole=の行のコメントアウト#を外すと起動メッセージもシリアルポートに出力されるようになります。<br>
+    (PC-9801UV21では動かないかも。PC-9801BX, PC-9801RX21では可。) <br>
+    (9600bpsで出力) console=ttyS0,9600 3 <br>
     <h2>開発予定</h2>
     - 漢字表示<br>
     <h2>免責</h2>
