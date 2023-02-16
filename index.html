@@ -7,7 +7,7 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2022/12/29<br>
+      Last Update 2023/2/17<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のNEC PC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -133,6 +133,14 @@
     (9600bpsで出力) console=ttyS0,9600 3 <br>
     ELKSでファイルの修正を行った場合は再起動の前にsyncコマンドを実行し、確実にディスクに書き込んで下さい。<br>
     </p>
+    <p>
+    - ELKSmoria<br>
+    GPL3のローグライクゲームであるUmoria 5.6を移植中です。<br>
+    ELKSのアプリはcode sizeが128KB, data segment sizeが64KBまでという制約があるため<br>
+    Umoria 5.6のコードを元にかなり大胆に機能を制限したものになります。<br>
+     <a href="https://github.com/jbruchon/elks/discussions/1505"> Ideas to port UMoria (Roguelike game) with elks curses</a><br><br>
+     <a href="https://github.com/tyama501/ELKSmoria"> ELKSmoriaリポジトリ</a><br><br>
+     <a href="https://twitter.com/tyama50/status/1624438452195565568"> テストプレイ動画</a><br><br>
     <h2>開発予定</h2>
     - 漢字表示<br>
     <h2>免責</h2>
