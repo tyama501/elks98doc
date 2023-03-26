@@ -7,11 +7,12 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2023/2/21<br>
+      Last Update 2023/3/26<br>
     </p>
     <p>
-      　このページはEmbeddable Linux Kernel Subset (ELKS)のNEC PC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
+      　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
       ELKSは8086, 80286, V30等のIntel IA16アーキテクチャ向けに開発されているLinux-like OSです。<br>
+      PC-9801/PC-9821は80年代から2000年代初頭にかけてNECから販売されていたパーソナルコンピュータです。<br>
       開発は以下のリポジトリで行われており、PC-98向けの機能もこちらでマージされています。<br>
       Github ELKSリポジトリ <a href="https://github.com/jbruchon/elks"> https://github.com/jbruchon/elks </a>
     </p>
@@ -37,9 +38,15 @@
         Assetsのところにあるfd1232-pc98.img, fd1440-pc98.imgがPC-98向けになります。<br>
         fd1232-pc98.img : 1.232MB 2HD向け (3.5インチ/5.25インチ)<br>
         fd1440-pc98.img : 1.440MB PC-9801BX以降の3モードドライブ等で使用可 (3.5インチ)<br><br>
-        開発中のもので最新のcommitでビルドされたものはActionsからcommitメッセージをクリックすると入手できます。(不安定な可能性あり)<br>
+        開発版で最新のcommitでビルドされたものはActionsからcommitメッセージをクリックすると入手できます。<br>
         こちらは現状PC-98版はfd1232.imgのみになります。<br>
         <a href="https://github.com/jbruchon/elks/actions"> https://github.com/jbruchon/elks/actions</a><br><br>
+        
+        <font color="blue">
+          2023.03.26現在<br>
+          0.7.0に向け0.6.0に対して多数のBug Fixや機能追加が入っています。<br>
+          試される場合、最新の開発版を用いるのをお薦めします。<br>
+        </font>
       </div>
       イメージはNeko Progject 21/WやDOSBox-Xのエミュレータでそのまま読み込めます。<br>
       拡張子が.imgのため、ファイル選択で表示されない場合は全てのファイルを表示させて行ってください。<br>
@@ -120,6 +127,8 @@
     それなりに描画できるようにはなっています。<br>
     以下はPC-9801BXでnxterm/nxclock/nxdemo/nxworld/nxlandmineを実行した動画です。<br>
     <a href="https://twitter.com/i/status/1564683753254924288"> PC-9801BXでのnano-Xアプリ描画</a><br>
+    PC-98向けマウスドライバを追加しました。<br>
+    <a href="https://twitter.com/tyama50/status/1639531608209498112"> PC-9801BXでマウス動作</a><br> 
     </p>
     <p>
     - シリアルコンソール<br>
