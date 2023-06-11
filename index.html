@@ -7,7 +7,7 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2023/5/14<br>
+      Last Update 2023/6/11<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -79,6 +79,9 @@
       PC-98形式でMBRのパーティションも記述したような特殊なものは現状未サポートなのでマウントしないでください。<br>
       BIOSで正しく認識できないものはマウントしないでください。<br>
       なお、無保証ですので重要なデータのディスクは直接マウントしないことをお薦めします。<br>
+      <font color="blue">※注意※</font> ELKSはsingle FATにしか対応していないため<br>
+      書き込みを行うとDOSのCHKDSK等で2つのFATが異なることによるエラーが検出されるようです。<br>
+      <a href="https://github.com/jbruchon/elks/issues/1545#issuecomment-1585815121"> https://github.com/jbruchon/elks/issues/1545#issuecomment-1585815121</a><br>
       <div style="margin-left:20px;">
         FDD第2ドライブのマウント方法<br>
         mount -t msdos /dev/fd1 /mnt<br>
