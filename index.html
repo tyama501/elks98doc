@@ -7,7 +7,7 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2023/7/20<br>
+      Last Update 2023/7/28<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -101,6 +101,12 @@
     <h3>エディタ</h3>
     vi(elvis)が使用できます。<br>
     viで起動できます。<br>
+    <font color="blue">※注意※</font> 現状viはFATにunused clusterを作るようです。<br>
+    <a href="https://github.com/jbruchon/elks/issues/1545#issuecomment-1604608807"> viのunused clusterについて</a><br>
+    PC-98版のフロッピイメージは非常に空き容量が少ないので頻繁にファイルを編集する場合は<br>
+    edit(mined)を使用した方が良いかもしれません。<br>
+    edit <ファイル名>で起動できます。<br>
+    ctrl-Wでファイル書き込み、ctrl-Xで終了です。<br>
     <h3>BASIC</h3>
     BASICで簡単なプログラミングができます。<br>
     PC-98向けでは一部のLIOを用いて描画できます。<br>
