@@ -1,13 +1,15 @@
 <html>
   <head>
     <meta charset="utf-8"/>
+    <meta http-equiv="Content-Style-Type" content="text/css">
     <meta name="viewport" content="width=device-width, user-scalable=yes">
     <title>ELKS PC-98</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
   </head>
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2023/7/28<br>
+      Last Update 2023/7/30<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -16,7 +18,7 @@
       開発は以下のリポジトリで行われており、PC-98向けの機能もこちらでマージされています。<br>
       Github ELKSリポジトリ <a href="https://github.com/jbruchon/elks"> https://github.com/jbruchon/elks </a>
     </p>
-    <h3>動作確認済み機種</h3>
+    <h2>動作確認済み機種</h2>
     <p>
       PC-9801UV21<br>
       PC-9801RX21<br>
@@ -39,7 +41,7 @@
         <a href="https://github.com/jbruchon/elks/actions"> https://github.com/jbruchon/elks/actions</a><br><br>
         
         <font color="blue">
-          2023.05.14現在<br>
+          2023.07.30現在<br>
           0.7.0に向け0.6.0に対して多数のBug Fixや機能追加が入っています。<br>
           試される場合、最新の開発版を用いるのをお薦めします。<br>
         </font>
@@ -82,15 +84,15 @@
       <font color="blue">※注意※</font> ELKSはsingle FATにしか対応していないため<br>
       書き込みを行うとDOSのCHKDSK等で2つのFATが異なることによるエラーが検出されるようです。<br>
       <a href="https://github.com/jbruchon/elks/issues/1545#issuecomment-1585815121"> https://github.com/jbruchon/elks/issues/1545#issuecomment-1585815121</a><br>
-      <div style="margin-left:20px;">
-        FDD第2ドライブのマウント方法<br>
-        mount -t msdos /dev/fd1 /mnt<br>
-        (第1,3,4ドライブをマウントする場合はfd0, fd2, fd3)<br><br>
-        HDD aドライブの第1パーティションをマウントする方法<br>
-        mount -t msdos /dev/hda1 /mnt<br>
-        (第2,3,4パーティションをマウントする場合はhda2,hda3,hda4)<br>
-        ディスクがhda, hdb, hdc, hddのどれに割り当てられたかは起動メッセージからご確認ください。<br><br> 
-      </div>
+      <dl>
+        <dt>FDD第2ドライブのマウント方法</dt>
+        <dd>mount -t msdos /dev/fd1 /mnt</dd>
+        <dd>(第1,3,4ドライブをマウントする場合はfd0, fd2, fd3)</dd>
+        <dt>HDD aドライブの第1パーティションをマウントする方法</dt>
+        <dd>mount -t msdos /dev/hda1 /mnt</dd>
+        <dd>(第2,3,4パーティションをマウントする場合はhda2,hda3,hda4)</dd>
+        <dd>ディスクがhda, hdb, hdc, hddのどれに割り当てられたかは起動メッセージからご確認ください。</dd> 
+      </dl>
       変更内容を確実にディスクに書き込むにはsyncを実施ください。<br>
       電源を切る前にディスクのumountを実施ください。<br>
       sync<br>
@@ -98,7 +100,7 @@
       shutdown<br>
     </p>
     <h2>アプリ / コマンド</h2>
-    <h3>エディタ</h3>
+    <h3>- エディタ</h3>
     vi(elvis)が使用できます。<br>
     viで起動できます。<br>
     <font color="blue">※注意※</font> 現状viはFATにunused clusterを作るようです。<br>
@@ -107,7 +109,7 @@
     edit(mined)を使用した方が良いかもしれません。<br>
     edit <ファイル名>で起動できます。<br>
     ctrl-Wでファイル書き込み、ctrl-Xで終了です。<br>
-    <h3>BASIC</h3>
+    <h3>- BASIC</h3>
     BASICで簡単なプログラミングができます。<br>
     PC-98向けでは一部のLIOを用いて描画できます。<br>
     basicで起動できます。<br>
@@ -121,7 +123,7 @@
     Miniゲームを作ってみました。<br>
     <a href="https://github.com/tyama501/microef">Micro E-Forest</a><br>
     <a href="https://github.com/jbruchon/elks/discussions/1618#discussioncomment-6395333">エミュレータでの実行動画</a><br><br>
-    <h3>screen</h3>
+    <h3>- screen</h3>
     ELKSはマルチタスクOSであるためバックグランドで処理を流せますが現状fg, bgのコマンドがありません。<br>
     2つのフォアグランドの処理を切り替えたい場合はscreenで別スクリーンを立ち上げてフォアグランドで流せば切り替えられます。<br>
     screen<br>
@@ -130,7 +132,7 @@
     Ctrl-a, kで終了<br>
     <h2>開発中</h2>
     <p>
-    - nano-X<br>
+    <h3>- nano-X</h3>
     nano-Xによる描画ドライバのPC-98版を開発中です。<br>
     それなりに描画できるようにはなっています。<br>
     以下はPC-9801BXでnxterm/nxclock/nxdemo/nxworld/nxlandmineを実行した動画です。<br>
@@ -139,7 +141,7 @@
     <a href="https://twitter.com/tyama50/status/1639531608209498112"> PC-9801BXでマウス動作</a><br> 
     </p>
     <p>
-    - シリアルコンソール<br>
+    <h3>- シリアルコンソール</h3>
     シリアルドライバを開発中です。<br>
     以下はPC-9801UV21にBaud Rate 1200bpsでWindowsのTera Termからログインした動画です。<br>
     <a href="https://twitter.com/tyama50/status/1606967893958496257"> PC-9801UV21にシリアルポートでログイン</a><br>
@@ -154,7 +156,7 @@
     ELKSでファイルの修正を行った場合は再起動の前にsyncコマンドを実行し、確実にディスクに書き込んで下さい。<br>
     </p>
     <p>
-    - ELKSmoria<br>
+    <h3>- ELKSmoria</h3>
     GPL3のローグライクゲームであるUmoria 5.6を移植中です。<br>
     ELKSのアプリはcode sizeが128KB, data segment sizeが64KBまでという制約があるため<br>
     Umoria 5.6のコードを元にかなり大胆に機能を制限したものになります。<br>
