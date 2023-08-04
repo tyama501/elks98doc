@@ -9,7 +9,7 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2023/7/30<br>
+      Last Update 2023/8/5<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -30,9 +30,10 @@
     <h2>イメージ</h2>
     <p>
       フロッピー向けのイメージは以下から入手できます。<br>
-      2022.09現在の最新リリースは0.6.0です。<br>
+      2023.08現在の最新リリースは0.7.0です。<br>
+      PC-98でシリアルコンソールやnano-Xアプリが使えるようになりました。<br>
       <div style="margin-left:20px;">
-        ELKS v0.6.0 <a href="https://github.com/jbruchon/elks/releases/tag/v0.6.0"> https://github.com/jbruchon/elks/releases/tag/v0.6.0 </a><br>
+        ELKS v0.7.0 <a href="https://github.com/jbruchon/elks/releases/tag/v0.7.0"> https://github.com/jbruchon/elks/releases/tag/v0.7.0 </a><br>
         Assetsのところにあるfd1232-pc98.img, fd1440-pc98.imgがPC-98向けになります。<br>
         fd1232-pc98.img : 1.232MB 2HD向け (3.5インチ/5.25インチ)<br>
         fd1440-pc98.img : 1.440MB PC-9801BX以降の3モードドライブ等で使用可 (3.5インチ)<br><br>
@@ -40,11 +41,6 @@
         こちらは現状PC-98版はfd1232.imgのみになります。<br>
         <a href="https://github.com/jbruchon/elks/actions"> https://github.com/jbruchon/elks/actions</a><br><br>
         
-        <font color="blue">
-          2023.07.30現在<br>
-          0.7.0に向け0.6.0に対して多数のBug Fixや機能追加が入っています。<br>
-          試される場合、最新の開発版を用いるのをお薦めします。<br>
-        </font>
       </div>
       イメージはNeko Progject 21/WやDOSBox-Xのエミュレータでそのまま読み込めます。<br>
       拡張子が.imgのため、ファイル選択で表示されない場合は全てのファイルを表示させて行ってください。<br>
@@ -98,6 +94,27 @@
       sync<br>
       umount /mnt<br>
       shutdown<br>
+      <h3>【上級者向け】</h3>
+      <dl>
+        <dt>ハードディスクへのインストール</dt>
+        <dd>あらかじめDOS等でPC-98のパーティションを作成し、FATでフォーマットしておく必要がありますが、</dd>
+        <dd>fd1440-pc98.imgのフロッピーディスクを用いることでハードディスクにインストールできます。</dd>
+        <dd><font color="blue">※注意※</font>fd1232-pc98.imgはブートコードが異なるのでこの方法ではインストールできません。</dd>
+        <dd>HDD aドライブの第1パーティションにインストールする場合</dd>
+        <dd>sys /dev/hda1</dd>
+        <dd>誤って意図しないパーティションにインストールしないようご注意ください。</dd>
+        <dt>MINIXファイルシステム</dt>
+        <dd>64MBまでのMINIXファイルシステムもマウントできます。</dd>
+        <dd>hda1がMINIXファイルシステムの場合</dd>
+        <dd>mount /dev/hda1 /mnt</dd>
+        <dd>パーティションを作成しておく必要がありますが64KBのMINIXファイルシステムは以下のコマンドで作成できます。</dd>
+        <dd>PC-98では現状ブートはできません。</dd>
+        <dd>mkfs /dev/hda1 65536</dd>
+        <dd>MINIXファイルシステムはFATに比べてpermissionが厳密になります。</dd>
+        <dd>(FATのファイルは基本誰でも読み書きできる。)</dd>
+        <dd>dirty bitが立つことがあるのは仕様のようです。</dd>
+        <dd><a href="https://github.com/jbruchon/elks/issues/1545#issuecomment-1589519193"> minixfsのdirty bit</a></dd>
+      </dl>
     </p>
     <h2>アプリ / コマンド</h2>
     <h3>- エディタ</h3>
@@ -116,13 +133,15 @@
     終了はctrl-Dです。<br>
     シンタックスは以下を参照ください。<br>
     save, loadのファイル名には.basを含めない点、ご注意ください。<br>
-    PEEK, POKEはv0.6.0リリース後に追加されたものになります。<br>
     <a href="https://github.com/jbruchon/elks/tree/master/elkscmd/basic#readme"> https://github.com/jbruchon/elks/tree/master/elkscmd/basic#readme</a><br><br>
     PC-98向けのサンプルは以下にあります。MODE 1でグラフィックモードに入ります。<br>
     <a href="https://github.com/jbruchon/elks/blob/master/elkscmd/basic/test98.bas">test98.bas</a><br><br>
     Miniゲームを作ってみました。<br>
     <a href="https://github.com/tyama501/microef">Micro E-Forest</a><br>
     <a href="https://github.com/jbruchon/elks/discussions/1618#discussioncomment-6395333">エミュレータでの実行動画</a><br><br>
+    エスケープシーケンスを用いてカーソルの表示、非表示を切り替えられるようになりました。<br>
+    ESC[?25lとキーボードから打つと非表示になります。<br>
+    ESC[?25hで表示になります。<br>
     <h3>- screen</h3>
     ELKSはマルチタスクOSであるためバックグランドで処理を流せますが現状fg, bgのコマンドがありません。<br>
     2つのフォアグランドの処理を切り替えたい場合はscreenで別スクリーンを立ち上げてフォアグランドで流せば切り替えられます。<br>
@@ -130,21 +149,24 @@
     Ctrl-a, cで別スクリーン<br>
     Ctrl-a, pでスクリーン切り替え<br>
     Ctrl-a, kで終了<br>
-    <h2>開発中</h2>
-    <p>
     <h3>- nano-X</h3>
-    nano-Xによる描画ドライバのPC-98版を開発中です。<br>
-    それなりに描画できるようにはなっています。<br>
+    nano-Xによる描画ドライバのPC-98版が入りました。<br>
+    PC-98向けマウスドライバも追加しました。<br>
+    以下のnano-XアプリをPC-98向けイメージには入れています。
+    <dl>
+      <dt>nxworld</dt>
+      <dd>世界地図。マウスのドラッグで拡大。右クリックで緯度経度表示。ESCで終了。</dd>
+      <dt>nxlandmine</dt>
+      <dd>マインゲーム。マウス必須。某ゲームと異なり開いているところに隣接したところからしか開けません。一度爆発しても続行。</dd>
+      <dt>nxtetris</dt>
+      <dd>ブロックゲーム。マウス無しでも遊べます。nキーでnewゲーム。s, d, j, k, spで移動。ESCで終了。</dd>
+      <dt>nxterm</dt>
+      <dd>ターミナルのデモ。</dd>
+    </dl>
     以下はPC-9801BXでnxterm/nxclock/nxdemo/nxworld/nxlandmineを実行した動画です。<br>
     <a href="https://twitter.com/i/status/1564683753254924288"> PC-9801BXでのnano-Xアプリ描画</a><br>
-    PC-98向けマウスドライバを追加しました。<br>
-    <a href="https://twitter.com/tyama50/status/1639531608209498112"> PC-9801BXでマウス動作</a><br> 
-    </p>
-    <p>
+    <a href="https://twitter.com/tyama50/status/1639531608209498112"> PC-9801BXでマウス動作</a><br>
     <h3>- シリアルコンソール</h3>
-    シリアルドライバを開発中です。<br>
-    以下はPC-9801UV21にBaud Rate 1200bpsでWindowsのTera Termからログインした動画です。<br>
-    <a href="https://twitter.com/tyama50/status/1606967893958496257"> PC-9801UV21にシリアルポートでログイン</a><br>
     /etc/inittabの先頭行を以下のように変更することでloginがシリアルポートにも出力されるようになります。<br>
     (変更前) id:1:initdefault: <br>
     (変更後) id:3:initdefault: <br>
@@ -154,7 +176,9 @@
     (PC-9801UV21では動かないかも。PC-9801BX, PC-9801RX21では可。) <br>
     (9600bpsで出力) console=ttyS0,9600 3 <br>
     ELKSでファイルの修正を行った場合は再起動の前にsyncコマンドを実行し、確実にディスクに書き込んで下さい。<br>
-    </p>
+    以下はPC-9801UV21にBaud Rate 1200bpsでWindowsのTera Termからログインした動画です。<br>
+    <a href="https://twitter.com/tyama50/status/1606967893958496257"> PC-9801UV21にシリアルポートでログイン</a><br>
+    <h2>開発中</h2>
     <p>
     <h3>- ELKSmoria</h3>
     GPL3のローグライクゲームであるUmoria 5.6を移植中です。<br>
