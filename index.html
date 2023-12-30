@@ -10,14 +10,14 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2023/8/6<br>
+      Last Update 2023/12/31<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
       ELKSは8086, 80286, V30等のIntel IA16アーキテクチャ向けに開発されているLinux-like OSです。<br>
       PC-9801/PC-9821は80年代から2000年代初頭にかけてNECから販売されていたパーソナルコンピュータです。<br>
       開発は以下のリポジトリで行われており、PC-98向けの機能もこちらでマージされています。<br>
-      Github ELKSリポジトリ <a href="https://github.com/jbruchon/elks"> https://github.com/jbruchon/elks </a>
+      Github ELKSリポジトリ <a href="https://github.com/ghaerr/elks"> https://github.com/ghaerr/elks </a>
     </p>
     <h2>動作確認済み機種</h2>
     <p>
@@ -26,21 +26,23 @@
       PC-9801BX<br>
       PC-9801NS/R (えふでぃ様調べ, commit 8cbf58e)<br>
       PC-9821Np   (えふでぃ様調べ, commit 8cbf58e)<br>
-      PC-9821Na12 (えふでぃ様調べ, commit 8cbf58e)<br>
+      PC-9821Na12 (えふでぃ様調べ, commit 8cbf58e)<br><br>
+      PC-98愛好会.NETの電子掲示板にエプソン PC-486SRで動作したと報告を頂きました。ありがとうございます。<br>
+      <a href="https://pc-98lm.net/cgi/joyful/joyful.cgi?read=145&bbs=1&pg=0"> PC-98愛好会.NETの電子掲示板</a>
     </p>
     <h2>イメージ</h2>
     <p>
       フロッピー向けのイメージは以下から入手できます。<br>
-      2023.08現在の最新リリースは0.7.0です。<br>
+      2023.08の最新リリースは0.7.0です。<br>
       PC-98でシリアルコンソールやnano-Xアプリが使えるようになりました。<br>
       <div style="margin-left:20px;">
-        ELKS v0.7.0 <a href="https://github.com/jbruchon/elks/releases/tag/v0.7.0"> https://github.com/jbruchon/elks/releases/tag/v0.7.0 </a><br>
+        ELKS v0.7.0 <a href="https://github.com/ghaerr/elks/releases/tag/v0.7.0"> https://github.com/ghaerr/elks/releases/tag/v0.7.0 </a><br>
         Assetsのところにあるfd1232-pc98.img, fd1440-pc98.imgがPC-98向けになります。<br>
         fd1232-pc98.img : 1.232MB 2HD向け (3.5インチ/5.25インチ)<br>
         fd1440-pc98.img : 1.440MB PC-9801BX以降の3モードドライブ等で使用可 (3.5インチ)<br><br>
         開発版で最新のcommitでビルドされたものはActionsからcommitメッセージをクリックすると入手できます。<br>
         こちらは現状PC-98版はfd1232.imgのみになります。<br>
-        <a href="https://github.com/jbruchon/elks/actions"> https://github.com/jbruchon/elks/actions</a><br><br>
+        <a href="https://github.com/ghaerr/elks/actions"> https://github.com/ghaerr/elks/actions</a><br><br>
         
       </div>
       イメージはNeko Progject 21/WやDOSBox-Xのエミュレータでそのまま読み込めます。<br>
@@ -80,7 +82,7 @@
       なお、無保証ですので重要なデータのディスクは直接マウントしないことをお薦めします。<br>
       <font color="blue">※注意※</font> ELKSはsingle FATにしか対応していないため<br>
       書き込みを行うとDOSのCHKDSK等で2つのFATが異なることによるエラーが検出されるようです。<br>
-      <a href="https://github.com/jbruchon/elks/issues/1545#issuecomment-1585815121"> https://github.com/jbruchon/elks/issues/1545#issuecomment-1585815121</a><br>
+      <a href="https://github.com/ghaerr/elks/issues/1545#issuecomment-1585815121"> https://github.com/ghaerr/elks/issues/1545#issuecomment-1585815121</a><br>
       <dl>
         <dt>FDD第2ドライブのマウント方法</dt>
         <dd>mount -t msdos /dev/fd1 /mnt</dd>
@@ -114,7 +116,17 @@
         <dd>MINIXファイルシステムはFATに比べてpermissionが厳密になります。</dd>
         <dd>(FATのファイルは基本誰でも読み書きできる。)</dd>
         <dd>dirty bitが立つことがあるのは仕様のようです。</dd>
-        <dd><a href="https://github.com/jbruchon/elks/issues/1545#issuecomment-1589519193"> minixfsのdirty bit</a></dd>
+        <dd><a href="https://github.com/ghaerr/elks/issues/1545#issuecomment-1589519193"> minixfsのdirty bit</a></dd>
+        <dt>720KB 2DD</dt>
+        <dd>1.232MB, 1.440MBの他、2023/12/29 0.8.0-dev commit 86a6061で720KB 2DDがmountできるようになりました。</dd>
+        <dd>640KBは非対応です。2HD/2DD共通ドライブのみ対応です。</dd>
+        <dd><a href="https://twitter.com/tyama50/status/1740435788373049497"> PC-9801UV21 720KBの読み込み</a></dd>
+        <dd><a href="https://github.com/ghaerr/elks/pull/1779"> Pull Request</a></dd>
+        <dd>Dさんが3 modeドライブでの確認を行ってくださいました。ありがとうございます。</dd>
+        <dd><a href="https://twitter.com/drachen6jp/status/1740742358696952218"> PC-9801BXでの2DDと1.44MB</a></dd>
+        <dt>UMB</dt>
+        <dd>何らかの方法でUMBにメモリを置くことができればdisk buffer等に使えるようです。</dd>
+        <dd><a href="https://github.com/ghaerr/elks/pull/1590#issuecomment-1723503880"> UMBでのdisk buffer</a></dd>
       </dl>
     </p>
     <h2>アプリ / コマンド</h2>
@@ -122,7 +134,7 @@
     vi(elvis)が使用できます。<br>
     viで起動できます。<br>
     <font color="blue">※注意※</font> 現状viはFATにunused clusterを作るようです。<br>
-    <a href="https://github.com/jbruchon/elks/issues/1545#issuecomment-1604608807"> viのunused clusterについて</a><br>
+    <a href="https://github.com/ghaerr/elks/issues/1545#issuecomment-1604608807"> viのunused clusterについて</a><br>
     PC-98版のフロッピイメージは非常に空き容量が少ないので頻繁にファイルを編集する場合は<br>
     edit(mined)を使用した方が良いかもしれません。<br>
     edit <ファイル名>で起動できます。<br>
@@ -134,12 +146,12 @@
     終了はctrl-Dです。<br>
     シンタックスは以下を参照ください。<br>
     save, loadのファイル名には.basを含めない点、ご注意ください。<br>
-    <a href="https://github.com/jbruchon/elks/tree/master/elkscmd/basic#readme"> https://github.com/jbruchon/elks/tree/master/elkscmd/basic#readme</a><br><br>
+    <a href="https://github.com/ghaerr/elks/tree/master/elkscmd/basic#readme"> https://github.com/ghaerr/elks/tree/master/elkscmd/basic#readme</a><br><br>
     PC-98向けのサンプルは以下にあります。MODE 1でグラフィックモードに入ります。<br>
-    <a href="https://github.com/jbruchon/elks/blob/master/elkscmd/basic/test98.bas">test98.bas</a><br><br>
+    <a href="https://github.com/ghaerr/elks/blob/master/elkscmd/basic/test98.bas">test98.bas</a><br><br>
     Miniゲームを作ってみました。<br>
     <a href="https://github.com/tyama501/microef">Micro E-Forest</a><br>
-    <a href="https://github.com/jbruchon/elks/discussions/1618#discussioncomment-6395333">エミュレータでの実行動画</a><br><br>
+    <a href="https://github.com/ghaerr/elks/discussions/1618#discussioncomment-6395333">エミュレータでの実行動画</a><br><br>
     エスケープシーケンスを用いてカーソルの表示、非表示を切り替えられるようになりました。<br>
     ESC[?25lとキーボードから打つと非表示になります。<br>
     ESC[?25hで表示になります。<br>
@@ -186,7 +198,7 @@
     GPL3のローグライクゲームであるUmoria 5.6を移植中です。<br>
     ELKSのアプリはcode sizeが128KB, data segment sizeが64KBまでという制約があるため<br>
     Umoria 5.6のコードを元にかなり大胆に機能を制限したものになります。<br>
-    <a href="https://github.com/jbruchon/elks/discussions/1505"> Ideas to port UMoria (Roguelike game) with elks curses</a><br><br>
+    <a href="https://github.com/ghaerr/elks/discussions/1505"> Ideas to port UMoria (Roguelike game) with elks curses</a><br><br>
     <a href="https://github.com/tyama501/ELKSmoria"> ELKSmoriaリポジトリ</a><br><br>
     <a href="https://twitter.com/tyama50/status/1624438452195565568"> テストプレイ動画</a><br><br>
     </p>
@@ -203,13 +215,13 @@
     ELKSやここに書かれた内容は無保証です。<br>
     記載内容を実施した結果生じたいかなる損害も当方は一切責任を負わないものとします。<br>
     <h2>謝辞</h2>
-    Twitter等で多くの貴重なPC-98の情報を下さる方々、<br>
+    X(Twitter)等で多くの貴重なPC-98の情報を下さる方々、<br>
     いつもどうもありがとうございます。<br>
     とても参考になり、また、励みになります。<br>
     <h2>問い合わせ</h2>
     issue:<br>
-    <a href="https://github.com/jbruchon/elks/issues"> https://github.com/jbruchon/elks/issues</a> (日本語でも大丈夫だと思います)<br>
-    Twitter:<br>
+    <a href="https://github.com/ghaerr/elks/issues"> https://github.com/ghaerr/elks/issues</a> (日本語でも大丈夫だと思います)<br>
+    X(Twitter):<br>
     <a href="https://twitter.com/tyama50"> https://twitter.com/tyama50</a><br>
     Mastodon:<br>
     <a rel="me" href="https://mstdn.jp/@tyamadon501"> https://mstdn.jp/@tyamadon501</a>
