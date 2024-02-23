@@ -10,7 +10,7 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2024/2/5<br>
+      Last Update 2024/2/24<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -194,6 +194,15 @@
     ELKSでファイルの修正を行った場合は再起動の前にsyncコマンドを実行し、確実にディスクに書き込んで下さい。<br>
     以下はPC-9801UV21にBaud Rate 1200bpsでWindowsのTera Termからログインした動画です。<br>
     <a href="https://twitter.com/tyama50/status/1606967893958496257"> PC-9801UV21にシリアルポートでログイン</a><br>
+    <h3>- beep</h3>
+    ビープ音が鳴らせます。(2024/2 0.8.0-dev commit 1d18595で対応)<br>
+    オプション<br>
+    -f 周波数(Hz), 整数<br>
+    -l 時間(msec), 整数<br>
+    -n 続けて実行<br>
+    example) beep -f1000 -l500 -n -f2000 -l1000 (1KHzで0.5秒後、2KHzで1秒)<br>
+    fやlの後にはスペースを入れないで下さい。<br>
+    <a href="https://twitter.com/tyama50/status/1758918426842821059"> PC-9801UV21でビープ</a><br>
     <h2>開発中</h2>
     <p>
     <h3>- ELKSmoria</h3>
@@ -221,6 +230,7 @@
     </p>
     <h2>開発予定</h2>
     - 漢字入力<br>
+    - プリンタ対応<br>
     <h2>免責</h2>
     ELKSやここに書かれた内容は無保証です。<br>
     記載内容を実施した結果生じたいかなる損害も当方は一切責任を負わないものとします。<br>
