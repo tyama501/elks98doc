@@ -10,7 +10,7 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2024/3/21<br>
+      Last Update 2024/5/12<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -204,6 +204,16 @@
     example) beep -f1000 -l500 -n -f2000 -l1000 (1KHzで0.5秒後、2KHzで1秒)<br>
     fやlの後にはスペースを入れないで下さい。<br>
     <a href="https://twitter.com/tyama50/status/1758918426842821059"> PC-9801UV21でビープ</a><br>
+    <h3>- fsck-dos</h3>
+    FAT向けcheckツールです。メモリの制約で現状フロッピーのみ対応です。(2024/3 0.8.0-dev)<br>
+    <dl>
+      <dt>FDD第2ドライブのディスクを問いに答えながら修復</dt>
+      <dd>fsck-dos /dev/fd1</dd>
+      <dt>必要な修復を自動で実行</dt>
+      <dd>fsck-dos -fp /dev/fd1</dd>
+    </dl>
+    <font color="blue">※注意※</font> 問いにyと答えた場合や修復を自動で行った場合は即書き込まれます。<br>
+    無保証ですのでご注意ください。<br>
     <h2>開発中</h2>
     <p>
     <h3>- ELKSmoria</h3>
@@ -222,8 +232,18 @@
     <a href="https://github.com/tyama501/nxjtxtv/releases"> Releases</a><br><br>
     <a href="https://twitter.com/tyama50/status/1751504930010186057"> PC-9801UV21で実行した画像</a><br><br>
     </p>
+    シフトJISからUTF8に変換を行うsjis-to-utf8をELKSで使えるよう改変しました。<br>
+    <a href="https://github.com/tyama501/sjis-to-utf8_elks"> sjis-to-utf8 for ELKSリポジトリ</a><br>
+    <a href="https://github.com/tyama501/sjis-to-utf8_elks/releases"> Releases</a><br>
+    sjisutf8 sjisfile > utf8file<br>
+    最新のnxjtxtvにpipeで繋いで表示することもメモリが足りればできます。
+    <a href="https://twitter.com/tyama50/status/1789249445735100679"> 画像</a><br>
+    sjisutf8 sjisfile | nxjtxtv <br>
+    UTF8に変換してファイルに書き込んだ場合、シフトJISより大きくなります。<br>
+    もし、変換途中でディスク空き容量が足りなくなり消せないブロックが出来た場合、<br>
+    別ディスクで起動してfsck-dosを実行すると直せるかもしれません。<br>
     <p>
-    - ハイレゾ機対応<br>
+    <h3>- ハイレゾ機対応</h3>
     Dさんがハイレゾ機での起動対応を行って下さいました。ありがとうございます。<br>
     (現状ではコンソールは80x25ライン, グラフィックは未対応)<br>
     <a href="https://twitter.com/drachen6jp/status/1655554176812978176"> ハイレゾ機での起動</a><br>
