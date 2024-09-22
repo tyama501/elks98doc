@@ -10,7 +10,7 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2024/5/12<br>
+      Last Update 2024/9/23<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -122,6 +122,7 @@
         <dt>720KB 2DD</dt>
         <dd>1.232MB, 1.440MBの他、2023/12/29 0.8.0-dev commit 86a6061で720KB 2DDがmountできるようになりました。</dd>
         <dd>640KBは非対応です。2HD/2DD共通ドライブのみ対応です。</dd>
+        <dd>Windows 11に繋がる2モードUSBドライブでも720KB 2DDを読めるものがあるので私は最近データ移動に使っています。</dd>
         <dd><a href="https://twitter.com/tyama50/status/1740435788373049497"> PC-9801UV21 720KBの読み込み</a></dd>
         <dd><a href="https://github.com/ghaerr/elks/pull/1779"> Pull Request</a></dd>
         <dd>Dさんが3 modeドライブでの確認を行ってくださいました。ありがとうございます。</dd>
@@ -190,11 +191,16 @@
     また、Baud Rateはs0の行の末尾に追加することで設定できます。<br>
     (1200bpsに設定) s0:2346:respawn:/bin/getty /dev/ttyS0 1200 <br>
     /bootoptsのconsole=の行のコメントアウト#を外すと起動メッセージもシリアルポートに出力されるようになります。<br>
-    (PC-9801UV21では動かないかも。PC-9801BX, PC-9801RX21では可。) <br>
     (9600bpsで出力) console=ttyS0,9600 3 <br>
     ELKSでファイルの修正を行った場合は再起動の前にsyncコマンドを実行し、確実にディスクに書き込んで下さい。<br>
     以下はPC-9801UV21にBaud Rate 1200bpsでWindowsのTera Termからログインした動画です。<br>
     <a href="https://twitter.com/tyama50/status/1606967893958496257"> PC-9801UV21にシリアルポートでログイン</a><br>
+    <h3>- miniterm</h3>
+    シリアルポートのterminalです。<br>
+    現状、PC-98版はシリアルポートを一つしかサポートしていないのでシリアルコンソールと併用できません。<br>
+    example) miniterm -s 1200 (1200bpsでterminalを開く)<br>
+    ~.で終了です。<br>
+    シリアルポートは8bit, パリティなし, ストップ 1bit, フロー制御なしのみ対応です。<br>
     <h3>- beep</h3>
     ビープ音が鳴らせます。(2024/2 0.8.0-dev commit 1d18595で対応)<br>
     オプション<br>
