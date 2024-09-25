@@ -10,7 +10,7 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2024/9/25<br>
+      Last Update 2024/9/26<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -147,7 +147,8 @@
     BASICで簡単なプログラミングができます。<br>
     PC-98向けでは一部のLIOを用いて描画できます。<br>
     basicで起動できます。<br>
-    終了はctrl-Dです。<br>
+    走らせたプログラムの終了はctrl-Cです。<br>
+    basicの終了はctrl-Dです。<br>
     シンタックスは以下を参照ください。<br>
     save, loadのファイル名には.basを含めない点、ご注意ください。<br>
     <a href="https://github.com/ghaerr/elks/tree/master/elkscmd/basic#readme"> https://github.com/ghaerr/elks/tree/master/elkscmd/basic#readme</a><br><br>
@@ -226,6 +227,13 @@
     sl -lだと小さくなります。<br>
     速い機種では速く、遅い機種では遅く走ります。<br>
     time slで実行時間が出るのでベンチマークにも使えるかもしれません。<br>
+    <h3>- ttyclock</h3>
+    時計が表示されます。(0.8.0で追加)<br>
+    終了はqです。
+    オプション<br>
+    -C [1-7] 色を設定<br>
+    -t 12時間formatで表示<br>
+    -u UTC時間を表示<br>
     <h2>開発中</h2>
     <p>
     <h3>- ELKSmoria</h3>
@@ -234,6 +242,8 @@
     Umoria 5.6のコードを元にかなり大胆に機能を制限したものになります。<br>
     <a href="https://github.com/ghaerr/elks/discussions/1505"> Ideas to port UMoria (Roguelike game) with elks curses</a><br><br>
     <a href="https://github.com/tyama501/ELKSmoria"> ELKSmoriaリポジトリ</a><br><br>
+    Releasesに実行ファイルも置いています。<br>
+    <a href="https://github.com/tyama501/ELKSmoria/releases"> Releases</a><br><br>
     <a href="https://twitter.com/tyama50/status/1624438452195565568"> テストプレイ動画</a><br><br>
     </p>
     <p>
