@@ -10,7 +10,7 @@
   <body>
     <h1>ELKS PC-98 紹介ページ</h1>
     <p style="font-size:smaller;">
-      Last Update 2024/9/26<br>
+      Last Update 2024/9/27<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -45,9 +45,13 @@
         開発版で最新のcommitでビルドされたものはActionsからcommitメッセージをクリックすると入手できます。<br>
         こちらは現状PC-98版はfd1232.imgのみになります。<br>
         <a href="https://github.com/ghaerr/elks/actions"> https://github.com/ghaerr/elks/actions</a><br><br>
-        
+
+        v0.8.0からフロッピーに収録できるアプリを増やすため圧縮実行ファイルが使われています。<br>
+        実行時に展開するため幾らか時間がかかります。<br><br>
+
       </div>
       イメージはNeko Progject 21/WやDOSBox-Xのエミュレータでそのまま読み込めます。<br>
+      <img src="ELKS_np21w.png"><br>
       拡張子が.imgのため、ファイル選択で表示されない場合は全てのファイルを表示させて行ってください。<br>
       DOSBox-XではNEC PC-98エミュレーションモードを有効にしてください。<br><br>
 
@@ -229,7 +233,7 @@
     time slで実行時間が出るのでベンチマークにも使えるかもしれません。<br>
     <h3>- ttyclock</h3>
     時計が表示されます。(0.8.0で追加)<br>
-    終了はqです。
+    終了はqです。<br>
     オプション<br>
     -C [1-7] 色を設定<br>
     -t 12時間formatで表示<br>
