@@ -8,9 +8,9 @@
     <link rel="canonical" href="https://tyama501.github.io/elks98doc/">
   </head>
   <body>
-    <h1><font color="chocolate">ELKS PC-98 紹介ページ</font></h1>
+    <h1><font color="chocolate">ELKS PC-98<br>紹介ページ</font></h1>
     <p style="font-size:smaller;">
-      Last Update 2024/9/28<br>
+      Last Update 2024/9/29<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -35,10 +35,10 @@
     <h2>イメージ</h2>
     <p>
       フロッピー向けのイメージは以下から入手できます。<br>
-      2023.08の最新リリースは0.7.0です。<br>
-      PC-98でシリアルコンソールやnano-Xアプリが使えるようになりました。<br>
+      2024.09の最新リリースは0.8.0です。<br>
+      PC-98の2HD/2DD共通ドライブで720KB 2DDのマウントができるようになりました。<br>
       <div style="margin-left:20px;">
-        ELKS v0.7.0 <a href="https://github.com/ghaerr/elks/releases/tag/v0.7.0"> https://github.com/ghaerr/elks/releases/tag/v0.7.0 </a><br>
+        ELKS v0.8.0 <a href="https://github.com/ghaerr/elks/releases/tag/v0.8.0"> https://github.com/ghaerr/elks/releases/tag/v0.8.0 </a><br>
         Assetsのところにあるfd1232-pc98.img, fd1440-pc98.imgがPC-98向けになります。<br>
         fd1232-pc98.img : 1.232MB 2HD向け (3.5インチ/5.25インチ)<br>
         fd1440-pc98.img : 1.440MB PC-9801BX以降の3モードドライブ等で使用可 (3.5インチ)<br><br>
@@ -140,19 +140,20 @@
         <dd>FATの場合、ユーザーの行き来で/tmpが書き込めなくなってしまうのを避けるため</dd>
         <dd>/etc/profileの以下のコメントアウト#を取り除くのがお薦めです。</dd>
         <dd>#if test "$USER" = "root"; then chmod 777 /tmp; fi</dd>
-        <dd>書き換えたらsyncを行ってください。</dd>
+        <dd>書き換えたらsync, exit再度rootでloginを行ってください。</dd>
       </dl>
+    <font color="blue">通常、ユーザーでlogin後passwdコマンドでパスワードの変更ができますが、<br>
+    現在0.8.0の/bin/passwdに問題があるようです。<br>
+    近いうちに0.8.1が出るとのことですが、それまでにpasswdを使う場合は以下に添付されている修正版のpasswdを使用してください。<br>
+    <a href="https://github.com/ghaerr/elks/issues/2041#issuecomment-2380832985"> issue #2041 </a><br>
+    </font>
     </p>
     <h2>アプリ / コマンド</h2>
     <h3>- エディタ</h3>
     vi(elvis)が使用できます。<br>
     viで起動できます。<br>
-    <font color="blue">※注意※</font> 現状viはFATにunused clusterを作るようです。<br>
-    <a href="https://github.com/ghaerr/elks/issues/1545#issuecomment-1604608807"> viのunused clusterについて</a><br>
-    PC-98版のフロッピイメージは非常に空き容量が少ないので頻繁にファイルを編集する場合は<br>
-    edit(mined)を使用した方が良いかもしれません。<br>
-    <font color="blue">この問題は2024/3 0.8.0-dev commit d740f3cで修正されたようです。</font><br>
-    edit(mined)はedit <ファイル名>で起動できます。<br>
+    edit(mined)も使用できます。<br>
+    edit <ファイル名>で起動できます。<br>
     ctrl-Wでファイル書き込み、ctrl-Xで終了です。<br>
     <h3>- BASIC</h3>
     BASICで簡単なプログラミングができます。<br>
@@ -214,7 +215,7 @@
     ~.で終了です。<br>
     シリアルポートは8bit, パリティなし, ストップ 1bit, フロー制御なしのみ対応です。<br>
     <h3>- beep</h3>
-    ビープ音が鳴らせます。(2024/2 0.8.0-dev commit 1d18595で対応)<br>
+    ビープ音が鳴らせます。(0.8.0で追加)<br>
     オプション<br>
     -f 周波数(Hz), 整数<br>
     -l 時間(msec), 整数<br>
@@ -223,7 +224,7 @@
     fやlの後にはスペースを入れないで下さい。<br>
     <a href="https://twitter.com/tyama50/status/1758918426842821059"> PC-9801UV21でビープ</a><br>
     <h3>- fsck-dos</h3>
-    FAT向けcheckツールです。メモリの制約で現状フロッピーのみ対応です。(2024/3 0.8.0-dev)<br>
+    FAT向けcheckツールです。メモリの制約で現状フロッピーのみ対応です。(0.8.0で追加)<br>
     <dl>
       <dt>FDD第2ドライブのディスクを問いに答えながら修復</dt>
       <dd>fsck-dos /dev/fd1</dd>
@@ -233,7 +234,7 @@
     <font color="blue">※注意※</font> 問いにyと答えた場合や修復を自動で行った場合は即書き込まれます。<br>
     無保証ですのでご注意ください。<br>
     <h3>- sl</h3>
-    lsを打ち間違えると汽車が走るあれです。(2024/9 0.8.0-pre3)<br>
+    lsを打ち間違えると汽車が走るあれです。(PC-98版は0.8.0で追加)<br>
     sl -Fだと飛んでいきます。<br>
     sl -lだと小さくなります。<br>
     速い機種では速く、遅い機種では遅く走ります。<br>
