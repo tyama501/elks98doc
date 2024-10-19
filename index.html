@@ -10,7 +10,7 @@
   <body>
     <h1><font color="chocolate">ELKS PC-98<br>紹介ページ</font></h1>
     <p style="font-size:smaller;">
-      Last Update 2024/9/29<br>
+      Last Update 2024/10/19<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -35,10 +35,10 @@
     <h2>イメージ</h2>
     <p>
       フロッピー向けのイメージは以下から入手できます。<br>
-      2024.09の最新リリースは0.8.0です。<br>
+      2024.10の最新リリースは0.8.1です。<br>
       PC-98の2HD/2DD共通ドライブで720KB 2DDのマウントができるようになりました。<br>
       <div style="margin-left:20px;">
-        ELKS v0.8.0 <a href="https://github.com/ghaerr/elks/releases/tag/v0.8.0"> https://github.com/ghaerr/elks/releases/tag/v0.8.0 </a><br>
+        ELKS v0.8.1 <a href="https://github.com/ghaerr/elks/releases/tag/v0.8.1"> https://github.com/ghaerr/elks/releases/tag/v0.8.1 </a><br>
         Assetsのところにあるfd1232-pc98.img, fd1440-pc98.imgがPC-98向けになります。<br>
         fd1232-pc98.img : 1.232MB 2HD向け (3.5インチ/5.25インチ)<br>
         fd1440-pc98.img : 1.440MB PC-9801BX以降の3モードドライブ等で使用可 (3.5インチ)<br><br>
@@ -122,6 +122,7 @@
         <dd>mkfs /dev/hda1 65536</dd>
         <dd>MINIXファイルシステムはFATに比べてpermissionが厳密になります。</dd>
         <dd>(FATのファイルは基本誰でも読み書きできる。)</dd>
+        <dd>MIXIXファイルシステムではハードリンクやシンボリックリンクが使えます。</dd>
         <dd>dirty bitが立つことがあるのは仕様のようです。</dd>
         <dd><a href="https://github.com/ghaerr/elks/issues/1545#issuecomment-1589519193"> minixfsのdirty bit</a></dd>
         <dt>720KB 2DD</dt>
@@ -141,12 +142,8 @@
         <dd>/etc/profileの以下のコメントアウト#を取り除くのがお薦めです。</dd>
         <dd>#if test "$USER" = "root"; then chmod 777 /tmp; fi</dd>
         <dd>書き換えたらsync, exit再度rootでloginを行ってください。</dd>
+        <dd>ユーザーでlogin後passwdコマンドでパスワードの変更ができます。</dd>
       </dl>
-    <font color="blue">通常、ユーザーでlogin後passwdコマンドでパスワードの変更ができますが、<br>
-    現在0.8.0の/bin/passwdに問題があるようです。<br>
-    近いうちに0.8.1が出るとのことですが、それまでにpasswdを使う場合は以下に添付されている修正版のpasswdを使用してください。<br>
-    <a href="https://github.com/ghaerr/elks/issues/2041#issuecomment-2380832985"> issue #2041 </a><br>
-    </font>
     </p>
     <h2>アプリ / コマンド</h2>
     <h3>- エディタ</h3>
