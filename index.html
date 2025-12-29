@@ -10,7 +10,7 @@
   <body>
     <h1><font color="chocolate">ELKS PC-98<br>紹介ページ</font></h1>
     <p style="font-size:smaller;">
-      Last Update 2024/10/19<br>
+      Last Update 2025/12/29<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -59,7 +59,19 @@
       私はフリーウェアのVirtual Floppy Image Converterで.D88形式に変換してDOS/V機5.25インチにDITTで書くか、<br>
       MAHALITO形式に変換してPC-9801実機で書くか、<br>
       ELKSのddでimgをそのままPC-9801実機で書くかしています。<br><br>
-      FDI形式に変換すればFlashFloppy化したGotek(ハードウェアFloppyエミュレータ)でも動きました。<br>
+      FDI形式に変換すればFlashFloppy化したGotek(ハードウェアFloppyエミュレータ)でも動きました。<br><br>
+
+      <font color="blue">
+      v0.9以降のリリースではc86コンパイラなど<br>
+      大きなアプリはハードディスクイメージで提供されることになるのかもしれません。<br>
+      hbr32mbr-fat.imgはIBM PC向けのMBR形式のイメージですが、ファイルを取り出せばPC-98で使えるものもあります。<br>
+      私はイメージのファイルの出し入れにはNDを使用しています。<br>
+      また、同作者様の仮想マシンハードディスクイメージ変換ツールNHC web版で<br>
+      全セクタ数63504, ヘッド16, セクタ63, VirtualPC Fixed形式の設定でVHDに変換することで<br>
+      Neko Project 21/Wで読み込み、<br>
+      ELKS PC-98から直接マウントすることもできました。<br>
+      素晴らしいツールをありがとうございます。<br>
+      </font>
     </p>
     <h2>ログイン</h2>
     <p>
@@ -113,11 +125,15 @@
         <dd>誤って意図しないパーティションにインストールしないようご注意ください。</dd>
         <dd><font color="blue">※注意※</font>fd1232-pc98.imgはブートコードが異なるのでこの方法ではインストールできません。</dd>
         <dd>fd1440/hd向けのブートコードのファイルを用意してmakebootを行う必要があります。必要な方は連絡下さい。</dd>
+        <font color="blue">
+        <dd>v0.9からはPC-98向けのfd1200も提供され、これを用いてもインストールできるようになる予定です。</dd>
+        </font>
+        <dd>
         <dt>MINIXファイルシステム</dt>
         <dd>64MBまでのMINIXファイルシステムもマウントできます。</dd>
         <dd>hda1がMINIXファイルシステムの場合</dd>
         <dd>mount /dev/hda1 /mnt</dd>
-        <dd>パーティションを作成しておく必要がありますが64KBのMINIXファイルシステムは以下のコマンドで作成できます。</dd>
+        <dd>パーティションを作成しておく必要がありますが64MBのMINIXファイルシステムは以下のコマンドで作成できます。</dd>
         <dd>PC-98では現状ブートはできません。</dd>
         <dd>mkfs /dev/hda1 65536</dd>
         <dd>MINIXファイルシステムはFATに比べてpermissionが厳密になります。</dd>
@@ -125,7 +141,7 @@
         <dd>MIXIXファイルシステムではハードリンクやシンボリックリンクが使えます。</dd>
         <dd>dirty bitが立つことがあるのは仕様のようです。</dd>
         <dd><a href="https://github.com/ghaerr/elks/issues/1545#issuecomment-1589519193"> minixfsのdirty bit</a></dd>
-        <dt>720KB 2DD</dt>
+        <dt>720KB 2DD<font color="blue">, 1.200MB 2HC</font></dt>
         <dd>1.232MB, 1.440MBの他、2023/12/29 0.8.0-dev commit 86a6061で720KB 2DDがmountできるようになりました。</dd>
         <dd>640KBは非対応です。2HD/2DD共通ドライブのみ対応です。</dd>
         <dd>Windows 11に繋がる2モードUSBドライブでも720KB 2DDを読めるものがあるので私は最近データ移動に使っています。</dd>
@@ -133,9 +149,23 @@
         <dd><a href="https://github.com/ghaerr/elks/pull/1779"> Pull Request</a></dd>
         <dd>Dさんが3 modeドライブでの確認を行ってくださいました。ありがとうございます。</dd>
         <dd><a href="https://twitter.com/drachen6jp/status/1740742358696952218"> PC-9801BXでの2DDと1.44MB</a></dd>
+        <font color="blue">
+        <dd>v0.9からは1.200MB 2HCもmountできるようになる予定です。(こちらもDさん、ご協力ありがとうございます。)</dd>
+        </font>
         <dt>UMB</dt>
         <dd>何らかの方法でUMBにメモリを置くことができればdisk buffer等に使えるようです。</dd>
         <dd><a href="https://github.com/ghaerr/elks/pull/1590#issuecomment-1723503880"> UMBでのdisk buffer</a></dd>
+        <font color="blue">
+        <dt>XMS</dt>
+        <dd>v0.9からkernelのHMAの配置やディスクバッファのXMSの配置、XMSのRamdiskへの利用等ができるようになる予定ですが、</dd>
+        <dd>PC-98の構成によっては問題が出るかもしれません。</dd>
+        </font>
+        <dd><a href="https://github.com/ghaerr/elks/issues/2398"> issue #2398</a></dd>
+        <dd>その場合は/bootoptsでHMAまたはXMSをdisableにしてみてください。</dd>
+        <dd>XMSをdisableにする場合</dd>
+        <dd>xms=onを#でコメントアウト
+        <dd>HMAをdisableにする場合</dd>
+        <dd>hma=kernelを#でコメントアウト</dd>
         <dt>ユーザーの追加</dt>
         <dd>必要ないかもしれませんが/etc/passwdに追加することでユーザーは追加できます。</dd>
         <dd>FATの場合、ユーザーの行き来で/tmpが書き込めなくなってしまうのを避けるため</dd>
@@ -193,7 +223,11 @@
     </dl>
     以下はPC-9801BXでnxterm/nxclock/nxdemo/nxworld/nxlandmineを実行した動画です。<br>
     <a href="https://twitter.com/i/status/1564683753254924288"> PC-9801BXでのnano-Xアプリ描画</a><br>
-    <a href="https://twitter.com/tyama50/status/1639531608209498112"> PC-9801BXでマウス動作</a><br>
+    <a href="https://twitter.com/tyama50/status/1639531608209498112"> PC-9801BXでマウス動作</a><br><br>
+    <font color="blue">
+    v0.9からwindow managerで複数アプリが同時に動くようになる予定です。<br>
+    </font>
+    <a href="https://x.com/tyama50/status/1964511050847691242"> PC-9801RXでwindow manager</a><br>
     <h3>- シリアルコンソール</h3>
     /etc/inittabの先頭行を以下のように変更することでloginがシリアルポートにも出力されるようになります。<br>
     (変更前) id:1:initdefault: <br>
@@ -234,8 +268,9 @@
     lsを打ち間違えると汽車が走るあれです。(PC-98版は0.8.0で追加)<br>
     sl -Fだと飛んでいきます。<br>
     sl -lだと小さくなります。<br>
+    sl -fでusleepが入らなくなります。<br>
     速い機種では速く、遅い機種では遅く走ります。<br>
-    time slで実行時間が出るのでベンチマークにも使えるかもしれません。<br>
+    time sl -fで実行時間が出るのでベンチマークにも使えるかもしれません。<br>
     <h3>- ttyclock</h3>
     時計が表示されます。(0.8.0で追加)<br>
     終了はqです。<br>
@@ -281,6 +316,16 @@
     (現状ではコンソールは80x25ライン, グラフィックは未対応)<br>
     <a href="https://twitter.com/drachen6jp/status/1655554176812978176"> ハイレゾ機での起動</a><br>
     メモリは768KB認識できるそうです。<br>
+    </p>
+    </p>
+    <font color="blue">
+    <h3>- シリアルポートでのファイル転送</h3>
+    E-kermitの移植を行いました。<br>
+    Windows上のTeraTerm等からファイルの送受信ができます。<br>
+    </font>
+    <a href="https://github.com/ghaerr/elks/discussions/2495"> Discussions #2495</a><br>
+    <a href="https://github.com/ghaerr/elks/pull/2554"> Pull Request #2554</a><br>
+    <a href="https://github.com/ghaerr/elks/tree/master/elkscmd/ekermit#readme"> E-kermit Readme</a><br>
     </p>
     <h2>開発予定</h2>
     - 漢字入力<br>
