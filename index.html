@@ -10,7 +10,7 @@
   <body>
     <h1><font color="chocolate">ELKS PC-98<br>紹介ページ</font></h1>
     <p style="font-size:smaller;">
-      Last Update 2025/12/29<br>
+      Last Update 2026/3/21<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -35,13 +35,18 @@
     <h2>イメージ</h2>
     <p>
       フロッピー向けのイメージは以下から入手できます。<br>
-      2024.10の最新リリースは0.8.1です。<br>
-      PC-98の2HD/2DD共通ドライブで720KB 2DDのマウントができるようになりました。<br>
+      2026.03の最新リリースは0.9.0です。<br>
+      <font color="blue">
+      Nano-Xでwindow managerによるGUIが使えるようになりました。<br>
+      PC-98向けの1.200MBイメージの提供が開始されました。<br>
+      </font>
       <div style="margin-left:20px;">
-        ELKS v0.8.1 <a href="https://github.com/ghaerr/elks/releases/tag/v0.8.1"> https://github.com/ghaerr/elks/releases/tag/v0.8.1 </a><br>
-        Assetsのところにあるfd1232-pc98.img, fd1440-pc98.imgがPC-98向けになります。<br>
+        ELKS v0.9.0 <a href="https://github.com/ghaerr/elks/releases/tag/v0.9.0"> https://github.com/ghaerr/elks/releases/tag/v0.9.0 </a><br>
+        Assetsのところにあるfd1232-pc98.img, fd1440-pc98.img, fd1200-pc98.imgがPC-98向けになります。<br>
+        イメージによって含まれるアプリは幾らか異なります。<br>
         fd1232-pc98.img : 1.232MB 2HD向け (3.5インチ/5.25インチ)<br>
-        fd1440-pc98.img : 1.440MB PC-9801BX以降の3モードドライブ等で使用可 (3.5インチ)<br><br>
+        fd1440-pc98.img : 1.440MB PC-9801BX以降の3モードドライブ等で使用可 (3.5インチ)<br>
+        fd1200-pc98.img : 1.200MB 2HC向け 後述のハードディスクへのインストールで使用可 (3.5インチ/5.25インチ)<br>
         開発版で最新のcommitでビルドされたものはActionsからcommitメッセージをクリックすると入手できます。<br>
         こちらは現状PC-98版はfd1232.imgのみになります。<br>
         <a href="https://github.com/ghaerr/elks/actions"> https://github.com/ghaerr/elks/actions</a><br><br>
@@ -62,8 +67,8 @@
       FDI形式に変換すればFlashFloppy化したGotek(ハードウェアFloppyエミュレータ)でも動きました。<br><br>
 
       <font color="blue">
-      v0.9以降のリリースではc86コンパイラなど<br>
-      大きなアプリはハードディスクイメージで提供されることになるのかもしれません。<br>
+      v0.9以降のリリースではC86コンパイラなど<br>
+      大きなアプリはハードディスクイメージで提供されることになりました。<br>
       hbr32mbr-fat.imgはIBM PC向けのMBR形式のイメージですが、ファイルを取り出せばPC-98で使えるものもあります。<br>
       私はイメージのファイルの出し入れにはNDを使用しています。<br>
       また、同作者様の仮想マシンハードディスクイメージ変換ツールNHC web版で<br>
@@ -119,15 +124,11 @@
       <dl>
         <dt>ハードディスクへのインストール</dt>
         <dd>あらかじめDOS等でPC-98のパーティションを作成し、FATでフォーマットしておく必要がありますが、</dd>
-        <dd>fd1440-pc98.imgのフロッピーディスクを用いることでハードディスクにインストールできます。</dd>
+        <dd><font color="blue">fd1200-pc98.img、またはfd1440-pc98.imgのフロッピーディスクを用いることでハードディスクにインストールできます。</font></dd>
         <dd>HDD aドライブの第1パーティションにインストールする場合</dd>
         <dd>sys /dev/hda1</dd>
         <dd>誤って意図しないパーティションにインストールしないようご注意ください。</dd>
         <dd><font color="blue">※注意※</font>fd1232-pc98.imgはブートコードが異なるのでこの方法ではインストールできません。</dd>
-        <dd>fd1440/hd向けのブートコードのファイルを用意してmakebootを行う必要があります。必要な方は連絡下さい。</dd>
-        <font color="blue">
-        <dd>v0.9からはPC-98向けのfd1200も提供され、これを用いてもインストールできるようになる予定です。</dd>
-        </font>
         <dd>
         <dt>MINIXファイルシステム</dt>
         <dd>64MBまでのMINIXファイルシステムもマウントできます。</dd>
@@ -150,14 +151,14 @@
         <dd>Dさんが3 modeドライブでの確認を行ってくださいました。ありがとうございます。</dd>
         <dd><a href="https://twitter.com/drachen6jp/status/1740742358696952218"> PC-9801BXでの2DDと1.44MB</a></dd>
         <font color="blue">
-        <dd>v0.9からは1.200MB 2HCもmountできるようになる予定です。(こちらもDさん、ご協力ありがとうございます。)</dd>
+        <dd>v0.9からは1.200MB 2HCもmountできるようになりました。(こちらもDさん、ご協力ありがとうございます。)</dd>
         </font>
         <dt>UMB</dt>
         <dd>何らかの方法でUMBにメモリを置くことができればdisk buffer等に使えるようです。</dd>
         <dd><a href="https://github.com/ghaerr/elks/pull/1590#issuecomment-1723503880"> UMBでのdisk buffer</a></dd>
         <font color="blue">
         <dt>XMS</dt>
-        <dd>v0.9からkernelのHMAの配置やディスクバッファのXMSの配置、XMSのRamdiskへの利用等ができるようになる予定ですが、</dd>
+        <dd>v0.9からkernelのHMAの配置やディスクバッファのXMSの配置、XMSのRamdiskへの利用等ができるようになりましたが、</dd>
         <dd>PC-98の構成によっては問題が出るかもしれません。</dd>
         </font>
         <dd><a href="https://github.com/ghaerr/elks/issues/2398"> issue #2398</a></dd>
@@ -166,6 +167,9 @@
         <dd>xms=onを#でコメントアウト
         <dd>HMAをdisableにする場合</dd>
         <dd>hma=kernelを#でコメントアウト</dd>
+        <font color="blue">
+        <dd>defaultではhma=kernelのみ有効になっています。</dd>
+        </font>
         <dt>ユーザーの追加</dt>
         <dd>必要ないかもしれませんが/etc/passwdに追加することでユーザーは追加できます。</dd>
         <dd>FATの場合、ユーザーの行き来で/tmpが書き込めなくなってしまうのを避けるため</dd>
@@ -202,6 +206,7 @@
     <h3>- screen</h3>
     ELKSはマルチタスクOSであるためバックグランドで処理を流せますが現状fg, bgのコマンドがありません。<br>
     2つのフォアグランドの処理を切り替えたい場合はscreenで別スクリーンを立ち上げてフォアグランドで流せば切り替えられます。<br>
+    <font color="blue">(v0.9からctrl-zで止めたものをfgで再開できるようにはなりました。)</font><br>
     screen<br>
     Ctrl-a, cで別スクリーン<br>
     Ctrl-a, pでスクリーン切り替え<br>
@@ -209,24 +214,43 @@
     <h3>- nano-X</h3>
     nano-Xによる描画ドライバのPC-98版が入りました。<br>
     PC-98向けマウスドライバも追加しました。<br>
-    以下のnano-XアプリをPC-98向けイメージには入れています。
+    <font color="blue">
+    v0.9からwindow managerで複数アプリが同時に動くようになりました。<br>
+    nxstartとnxdsktopの2種類があります。<br>
     <dl>
-      <dt>nxworld</dt>
-      <dd>世界地図。マウスのドラッグで拡大。右クリックで緯度経度表示。ESCで終了。</dd>
-      <dt>nxlandmine</dt>
+      <dt>nxstart</dt>
+      <dd>fd1232-pc98.img, fd1440-pc98.img, fd1200-pc98.imgに含まれます。nxstartで起動できます。</dd>
+      <dd>右側に出てくるメニューから選択するとアプリを起動できます。全てのアプリを閉じてメニューのxを押すと終了です。</dd>
+      <dd><img src="ELKS_nxstart.png"></dd>
+      <dt>nxdsktop</dt>
+      <dd>fd1232-pc98.imgに含まれます。nxdsktopで起動できます。左下のStartからメニューが出ます。</dd>
+      <dd>PC-98ではモノクロ表示のみ対応ですが、小さなjpegファイルの表示ができます。</dd>
+      <dd><img src="ELKS_nxdsktop.png"></dd>
+    </dl>
+    </font>
+    <dl>
+      <dt>nxmine</dt>
       <dd>マインゲーム。マウス必須。某ゲームと異なり開いているところに隣接したところからしか開けません。一度爆発しても続行。</dd>
-      <dd>(ハードディスクにsysでインストールすると実行バイナリ名が8文字nxlandmiになるかも)</dd>
+      <dd>(fd1232-pc98.imgに含まれます。)</dd>
       <dt>nxtetris</dt>
       <dd>ブロックゲーム。マウス無しでも遊べます。nキーでnewゲーム。s, d, j, k, spで移動。ESCで終了。</dd>
       <dt>nxterm</dt>
-      <dd>ターミナルのデモ。</dd>
+      <dd>ターミナル。</dd>
+      <dt>nxcalc</dt>
+      <dd>電卓。</dd>
     </dl>
+    <font color="blue">
+    nxworldはv0.9からディスク容量の都合上、PC-98向けフロッピーイメージには含まれなくなりました。</br></br>
+
+    Nano-XはDebug出力のためdefaultではシリアルポートを占有します。<br>
+    PC-98では通常シリアルポートが一つしかないと思いますのでNano-Xを起動中にシリアルポートを使用する場合は<br>
+    /bootoptsのDEBUG_PORT=noneのコメントアウトを外して再起動するか、<br>
+    export DEBUG_PORT=noneで環境変数を設定してからNano-Xを起動してください。<br><br>
+    </font>
+
     以下はPC-9801BXでnxterm/nxclock/nxdemo/nxworld/nxlandmineを実行した動画です。<br>
     <a href="https://twitter.com/i/status/1564683753254924288"> PC-9801BXでのnano-Xアプリ描画</a><br>
     <a href="https://twitter.com/tyama50/status/1639531608209498112"> PC-9801BXでマウス動作</a><br><br>
-    <font color="blue">
-    v0.9からwindow managerで複数アプリが同時に動くようになる予定です。<br>
-    </font>
     <a href="https://x.com/tyama50/status/1964511050847691242"> PC-9801RXでwindow manager</a><br>
     <h3>- シリアルコンソール</h3>
     /etc/inittabの先頭行を以下のように変更することでloginがシリアルポートにも出力されるようになります。<br>
@@ -243,7 +267,7 @@
     シリアルポートのterminalです。<br>
     現状、PC-98版はシリアルポートを一つしかサポートしていないのでシリアルコンソールと併用できません。<br>
     example) miniterm -s 1200 (1200bpsでterminalを開く)<br>
-    ~.で終了です。<br>
+    ~.で終了です。(USBのキーボード変換を使っている場合やエミュレータでは~はシフト+@のようです)<br>
     シリアルポートは8bit, パリティなし, ストップ 1bit, フロー制御なしのみ対応です。<br>
     <h3>- beep</h3>
     ビープ音が鳴らせます。(0.8.0で追加)<br>
@@ -278,19 +302,55 @@
     -C [1-7] 色を設定<br>
     -t 12時間formatで表示<br>
     -u UTC時間を表示<br>
+    <font color="blue">
+    <h3>- ekermit</h3>
+    E-kermitの移植を行いました。<br>
+    fd1440-pc98.imgに含まれます。<br>
+    Windows上のTera TermやDebian上のckermit等からシリアルポートを用いてファイルの送受信ができます。<br>
+    </font>
+    <a href="https://github.com/ghaerr/elks/tree/master/elkscmd/ekermit#readme"> E-kermit Readme</a><br>
+    <a href="https://github.com/ghaerr/elks/discussions/2495"> Discussions #2495</a><br>
+    <a href="https://github.com/ghaerr/elks/pull/2554"> Pull Request #2554</a><br><br>
+    <font color="blue">
+    Tera Termから送信を行う場合はekermit -rを実施後、Tera Termの転送 > Kermit > 送信を行ってください。<br>
+    Tera Termが受信を行う場合はTera Termの転送 > Kermit > 受信を行ってからekermitの送信を行ってください。<br><br>
+    Debianのckermitでは以下の設定を行うことで私は転送ができるようになりました。<br>
+    set send packet-length 80 <br>
+    set window-size 1 <br>
+    set flow-control none <br>
+    set carrier-watch off <br>
+    </font>
+    <font color="blue">
+    <h3>- C86 Native Cコンパイラ</h3>
+    v0.9からハードディスクイメージに含まれるようになりました。<br>
+    前述のようにhbr32mbr-fat.imgはIBM PC向けのMBR形式のイメージですが、ファイルを取り出すか<br>
+    マウントを行いPathを通せばPC-98でも使えます。<br>
+    ELKSのkernelやNano-Xのコンパイルはできませんが、小さなCUIアプリなら作れます。<br>
+    C86コンパイラは上記イメージの/usr以下のbin, include, lib, srcに入っています。<br>
+    srcにはサンプルが入っています。以下で試せます。<br>
+    mount /dev/hda1 /mnt<br>
+    export PATH=$PATH:/mnt/usr/bin<br>
+    cd /mnt/usr/src<br>
+    Makefile中のincludeやlibのPathを直す。<br>
+    make<br>
+    </font>
     <h2>開発中</h2>
     <p>
     <h3>- ELKSmoria</h3>
     GPL3のローグライクゲームであるUmoria 5.6を移植中です。<br>
-    ELKSのアプリはcode sizeが128KB, data segment sizeが64KBまでという制約があるため<br>
+    メモリの使用量を減らすため<br>
     Umoria 5.6のコードを元にかなり大胆に機能を制限したものになります。<br>
     <a href="https://github.com/ghaerr/elks/discussions/1505"> Ideas to port UMoria (Roguelike game) with elks curses</a><br><br>
     <a href="https://github.com/tyama501/ELKSmoria"> ELKSmoriaリポジトリ</a><br><br>
     Releasesに実行ファイルも置いています。<br>
     <a href="https://github.com/tyama501/ELKSmoria/releases"> Releases</a><br><br>
     <a href="https://twitter.com/tyama50/status/1624438452195565568"> テストプレイ動画</a><br><br>
+    <font color="blue">
     Open Watcomでアプリ開発を行い、0.8.0以降で実行すれば<br>
-    より大きなコードも可能なので今後開発環境を移行するかもしれません。<br>
+    より大きなコードも可能なので開発環境を移行しました。<br><br>
+
+    v0.9からハードディスクイメージに含まれるようになりました。<br>
+    </font>
     </p>
     <p>
     <h3>- 漢字表示</h3>
@@ -316,16 +376,6 @@
     (現状ではコンソールは80x25ライン, グラフィックは未対応)<br>
     <a href="https://twitter.com/drachen6jp/status/1655554176812978176"> ハイレゾ機での起動</a><br>
     メモリは768KB認識できるそうです。<br>
-    </p>
-    </p>
-    <font color="blue">
-    <h3>- シリアルポートでのファイル転送</h3>
-    E-kermitの移植を行いました。<br>
-    Windows上のTeraTerm等からファイルの送受信ができます。<br>
-    </font>
-    <a href="https://github.com/ghaerr/elks/discussions/2495"> Discussions #2495</a><br>
-    <a href="https://github.com/ghaerr/elks/pull/2554"> Pull Request #2554</a><br>
-    <a href="https://github.com/ghaerr/elks/tree/master/elkscmd/ekermit#readme"> E-kermit Readme</a><br>
     </p>
     <h2>開発予定</h2>
     - 漢字入力<br>
