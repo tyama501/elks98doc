@@ -10,7 +10,7 @@
   <body>
     <h1><font color="chocolate">ELKS PC-98<br>紹介ページ</font></h1>
     <p style="font-size:smaller;">
-      Last Update 2026/3/28<br>
+      Last Update 2026/9/22<br>
     </p>
     <p>
       　このページはEmbeddable Linux Kernel Subset (ELKS)のPC-9801/PC-9821版の使用法や開発状況を紹介していくページです。<br>
@@ -35,13 +35,13 @@
     <h2>イメージ</h2>
     <p>
       フロッピー向けのイメージは以下から入手できます。<br>
-      2026.03の最新リリースは0.9.0です。<br>
+      2026.09の最新リリースは0.9.2です。<br>
       <font color="blue">
       Nano-Xでwindow managerによるGUIが使えるようになりました。<br>
       PC-98向けの1.200MBイメージの提供が開始されました。<br>
       </font>
       <div style="margin-left:20px;">
-        ELKS v0.9.0 <a href="https://github.com/ghaerr/elks/releases/tag/v0.9.0"> https://github.com/ghaerr/elks/releases/tag/v0.9.0 </a><br>
+        ELKS v0.9.2 <a href="https://github.com/ghaerr/elks/releases/tag/v0.9.2"> https://github.com/ghaerr/elks/releases/tag/v0.9.2 </a><br>
         Assetsのところにあるfd1232-pc98.img, fd1440-pc98.img, fd1200-pc98.imgがPC-98向けになります。<br>
         イメージによって含まれるアプリは幾らか異なります。<br>
         fd1232-pc98.img : 1.232MB 2HD向け (3.5インチ/5.25インチ)<br>
@@ -66,7 +66,6 @@
       ELKSのddでimgをそのままPC-9801実機で書くかしています。<br><br>
       FDI形式に変換すればFlashFloppy化したGotek(ハードウェアFloppyエミュレータ)でも動きました。<br><br>
 
-      <font color="blue">
       v0.9以降のリリースではC86コンパイラなど<br>
       大きなアプリはハードディスクイメージで提供されることになりました。<br>
       hbr32mbr-fat.imgはIBM PC向けのMBR形式のイメージですが、ファイルを取り出せばPC-98で使えるものもあります。<br>
@@ -76,7 +75,6 @@
       Neko Project 21/Wで読み込み、<br>
       ELKS PC-98から直接マウントすることもできました。<br>
       素晴らしいツールをありがとうございます。<br>
-      </font>
     </p>
     <h2>ログイン</h2>
     <p>
@@ -156,11 +154,9 @@
         <dt>UMB</dt>
         <dd>何らかの方法でUMBにメモリを置くことができればdisk buffer等に使えるようです。</dd>
         <dd><a href="https://github.com/ghaerr/elks/pull/1590#issuecomment-1723503880"> UMBでのdisk buffer</a></dd>
-        <font color="blue">
         <dt>XMS</dt>
         <dd>v0.9からkernelのHMAの配置やディスクバッファのXMSの配置、XMSのRamdiskへの利用等ができるようになりましたが、</dd>
         <dd>PC-98の構成によっては問題が出るかもしれません。</dd>
-        </font>
         <dd><a href="https://github.com/ghaerr/elks/issues/2398"> issue #2398</a></dd>
         <dd>その場合は/bootoptsでHMAまたはXMSをdisableにしてみてください。</dd>
         <dd>XMSをdisableにする場合</dd>
@@ -214,7 +210,6 @@
     <h3>- nano-X</h3>
     nano-Xによる描画ドライバのPC-98版が入りました。<br>
     PC-98向けマウスドライバも追加しました。<br>
-    <font color="blue">
     v0.9からwindow managerで複数アプリが同時に動くようになりました。<br>
     nxstartとnxdsktopの2種類があります。<br>
     <dl>
@@ -230,7 +225,6 @@
       <dd>/tmp/nxsockが残っていると起動できないことがあるようです。</dd>
       <dd><a href="https://github.com/toncho11/microwindows/wiki"> NXDSKTOP help</a></dd>
     </dl>
-    </font>
     <dl>
       <dt>nxmine</dt>
       <dd>マインゲーム。マウス必須。某ゲームと異なり開いているところに隣接したところからしか開けません。一度爆発しても続行。</dd>
@@ -305,7 +299,6 @@
     -C [1-7] 色を設定<br>
     -t 12時間formatで表示<br>
     -u UTC時間を表示<br>
-    <font color="blue">
     <h3>- invaders</h3>
     テキストによる侵略ゲーム。<br>
     キー操作は以下です。<br>
@@ -317,11 +310,9 @@
     E-kermitの移植を行いました。<br>
     fd1440-pc98.imgに含まれます。<br>
     Windows上のTera TermやDebian上のckermit等からシリアルポートを用いてファイルの送受信ができます。<br>
-    </font>
     <a href="https://github.com/ghaerr/elks/tree/master/elkscmd/ekermit#readme"> E-kermit Readme</a><br>
     <a href="https://github.com/ghaerr/elks/discussions/2495"> Discussions #2495</a><br>
     <a href="https://github.com/ghaerr/elks/pull/2554"> Pull Request #2554</a><br><br>
-    <font color="blue">
     Tera Termから送信を行う場合はekermit -rを実施後、Tera Termの転送 > Kermit > 送信を行ってください。<br>
     Tera Termが受信を行う場合はTera Termの転送 > Kermit > 受信を行ってからekermitの送信を行ってください。<br><br>
     Debianのckermitでは以下の設定を行うことで私は転送ができるようになりました。<br>
@@ -329,8 +320,6 @@
     set window-size 1 <br>
     set flow-control none <br>
     set carrier-watch off <br>
-    </font>
-    <font color="blue">
     <h3>- C86 Native Cコンパイラ</h3>
     v0.9からハードディスクイメージに含まれるようになりました。<br>
     前述のようにhbr32mbr-fat.imgはIBM PC向けのMBR形式のイメージですが、ファイルを取り出すか<br>
@@ -343,6 +332,9 @@
     cd /mnt/usr/src<br>
     Makefile中のincludeやlibのPathを直す。<br>
     make<br>
+    <font color="blue">
+    <h3>- dmesg</h3>
+    v0.9.2から起動ログを確認できるようになりました。<br>
     </font>
     <h2>開発中</h2>
     <p>
@@ -355,12 +347,10 @@
     Releasesに実行ファイルも置いています。<br>
     <a href="https://github.com/tyama501/ELKSmoria/releases"> Releases</a><br><br>
     <a href="https://twitter.com/tyama50/status/1624438452195565568"> テストプレイ動画</a><br><br>
-    <font color="blue">
     Open Watcomでアプリ開発を行い、0.8.0以降で実行すれば<br>
     より大きなコードも可能なので開発環境を移行しました。<br><br>
 
     v0.9からハードディスクイメージに含まれるようになりました。<br>
-    </font>
     </p>
     <p>
     <h3>- 漢字表示</h3>
